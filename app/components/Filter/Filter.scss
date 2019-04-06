@@ -1,0 +1,9 @@
+@import "../../styles/variables";
+
+.filter {
+  border: 2px solid $primary-light;
+  flex: 1;
+  height: 250px;
+  margin: 0 50px 50px 50px;
+  position: relative;
+}

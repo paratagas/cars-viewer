@@ -1,0 +1,32 @@
+@import "../../styles/variables";
+
+.nav--bar {
+  border-bottom: 2px solid $primary-light;
+  display: flex;
+  margin: 25px;
+  margin-left: 0;
+  padding-bottom: 20px;
+  width: 100%;
+
+  &__logo {
+    margin-left: 50px;
+  }
+
+  &__menu {
+    display: flex;
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: 50px;
+    margin-top: 20px;
+
+    &__item {
+      cursor: pointer;
+      margin-left: 20px;
+
+      a {
+        color: $primary-dark;
+        text-decoration: none;
+      }
+    }
+  }
+}

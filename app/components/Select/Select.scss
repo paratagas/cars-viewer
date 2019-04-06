@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+
+.select {
+  border: 2px solid $primary-light;
+  color: $primary-dark;
+  font-size: 18px;
+  margin: 10px;
+  margin-bottom: 15px;
+
+  select {
+    width: 100%;
+  }
+}

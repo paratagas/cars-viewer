@@ -1,0 +1,32 @@
+@import "../../styles/variables";
+
+.car {
+  border: 2px solid $primary-light;
+  display: flex;
+  margin: 20px;
+  padding: 10px;
+
+  &__info {
+    margin-left: 50px;
+
+    &__name {
+      color: $primary-dark;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    &__main {
+      color: $primary-dark;
+      font-size: 18px;
+    }
+
+    &__details {
+      color: $secondary-light;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

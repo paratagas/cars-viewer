@@ -1,0 +1,25 @@
+@import "../../styles/variables";
+
+.header {
+  color: $primary-dark;
+  display: flex;
+  padding: 20px;
+
+  &__available {
+    flex: 1;
+
+    &__cars {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    &__results {
+      font-size: 32px;
+    }
+  }
+
+  &__sort {
+    flex: 1;
+    margin-right: -10px;
+  }
+}

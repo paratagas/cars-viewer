@@ -1,0 +1,16 @@
+@import "../../styles/variables";
+
+.button {
+  background-color: $secondary-light;
+  border-radius: 5px;
+  color: $primary-light;
+  cursor: pointer;
+  height: 32px;
+  width: 127px;
+}
+
+.button.right {
+  margin-top: 20px;
+  position: absolute;
+  right: 10px;
+}

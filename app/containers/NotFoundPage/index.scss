@@ -1,0 +1,26 @@
+@import "../../styles/variables";
+
+.not--found--page {
+  bottom: 40%;
+  color: $primary-dark;
+  left: 35%;
+  position: absolute;
+  right: 35%;
+  text-align: center;
+  width: 30%;
+
+  &__header {
+    font-size: 32px;
+    margin-top: 24px;
+  }
+
+  &__message {
+    font-size: 18px;
+    margin-top: 24px;
+
+    &__home {
+      color: $secondary-light;
+      text-decoration: none;
+    }
+  }
+}
