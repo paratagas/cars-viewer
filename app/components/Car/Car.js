@@ -17,6 +17,7 @@ class Car extends Component {
 
     render() {
         const { data, currentCar } = this.props;
+        const url  = `/details/${data.stockNumber}`;
 
         return (
             <div className="car">
@@ -24,7 +25,7 @@ class Car extends Component {
                 <div className="car__info">
                     <div className="car__info__name">{`${data.manufacturerName} ${data.modelName}`}</div>
                     <div className="car__info__main">{this.createMainInfo(data)}</div>
-                    <a className="car__info__details" href="/details">View details</a>
+                    <a className="car__info__details" href={url}>View details</a>
                 </div>
             </div>
         );

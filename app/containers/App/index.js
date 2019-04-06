@@ -24,7 +24,7 @@ export default function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/details" component={DetailsPage} />
+        <Route path="/details/:stockNumber" component={DetailsPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <Footer />

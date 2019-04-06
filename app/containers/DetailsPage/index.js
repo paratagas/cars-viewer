@@ -1,5 +1,5 @@
 /*
- * HomePage
+ * DetailsPage
  *
  * This is the first thing users see of our App, at the '/' route
  *
@@ -51,8 +51,10 @@ class DetailsPage extends React.PureComponent {
   }
 
   componentWillMount() {
+    const stockNumber = this.props.match.params.stockNumber;
+
     axios
-      .get(BASE_API_URL + 'cars/10629')
+      .get(BASE_API_URL + `cars/${stockNumber}`)
       .then(response => {
         const data = response.data;
         // console.log('currentCar: ', data);
