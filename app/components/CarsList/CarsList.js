@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import injectReducer from 'utils/injectReducer';
 import axios from 'axios';
@@ -30,6 +29,7 @@ class CarsList extends Component {
             .get(BASE_API_URL + 'cars')
             .then(response => {
                 const data = response.data;
+                console.log('data: ', data);
                 this.props.setCars(data.cars);
             })
             .catch(error => {

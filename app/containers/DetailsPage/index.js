@@ -10,22 +10,65 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import injectReducer from 'utils/injectReducer';
+import axios from 'axios';
+import reducer from './reducer';
+import { setCurrentCar } from './actions';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import './index.scss';
-import { CAR_IMAGE_PLACEHOLDER_LARGE } from '../../constants';
+import { BASE_API_URL, CAR_IMAGE_PLACEHOLDER_LARGE } from '../../constants';
 import Button from '../../components/Button/Button';
 import { saveCarToFavList } from '../../components/Util/localStorage';
 
 /* eslint-disable react/prefer-stateless-function */
-export default class DetailsPage extends React.PureComponent {
+class DetailsPage extends React.PureComponent {
+  static propTypes = {
+    currentCar: PropTypes.object,
+  };
+
+  static defaultProps = {
+    /*currentCar: {
+      color: "yellow",
+      fuelType: "Petrol",
+      manufacturerName: "Chrysler",
+      mileage: {
+        number: 106411,
+        unit: "km",
+      },
+      modelName: "Grand Voyager",
+      stockNumber: 10075,
+    },*/
+    currentCar: {},
+  };
+
   constructor(props) {
       super(props);
       this.saveCarToFavList = saveCarToFavList.bind(this);
   }
 
+  componentWillMount() {
+    axios
+      .get(BASE_API_URL + 'cars/10629')
+      .then(response => {
+        const data = response.data;
+        // console.log('currentCar: ', data);
+        this.props.setCurrentCar(data.car);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   render() {
+    const { currentCar } = this.props;
+
+    //console.log('currentCar: ', currentCar);
     return (
+    currentCar.stockNumber ?
       <div className="details">
         <div className="details__image">
           <img src={CAR_IMAGE_PLACEHOLDER_LARGE} />
@@ -33,10 +76,10 @@ export default class DetailsPage extends React.PureComponent {
         <div className="details__info">
           <div className="details__info__car">
             <div className="details__info__car__title">
-              Chrysler Crossfire
+              {`${currentCar.manufacturerName} ${currentCar.modelName}`}
             </div>
             <div className="details__info__car__info">
-              Stock # 61184 - 152.263 KM - Petrol - Yellow
+              {`Stock # ${currentCar.stockNumber} - ${currentCar.mileage.number} ${currentCar.mileage.unit} - ${currentCar.fuelType} - ${currentCar.color}`}
             </div>
             <div className="details__info__car__main--text">
               This car is currently available and can be delivered as soon as
@@ -57,7 +100,26 @@ export default class DetailsPage extends React.PureComponent {
             />
           </div>
         </div>
-      </div>
+      </div> :
+      <div>Loading</div>
     );
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    currentCar: store.toObject().currentCar,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentCar: car => dispatch(setCurrentCar(car)),
+});
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withReducer = injectReducer({ key: 'currentCar', reducer });
+
+export default compose(
+  withReducer,
+  withConnect,
+)(DetailsPage);

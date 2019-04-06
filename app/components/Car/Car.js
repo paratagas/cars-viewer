@@ -16,7 +16,7 @@ class Car extends Component {
     }
 
     render() {
-        const { data } = this.props;
+        const { data, currentCar } = this.props;
 
         return (
             <div className="car">
