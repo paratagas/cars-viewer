@@ -1,6 +1,5 @@
 import {
     SAVE_CARS_TO_SERVER,
-    GET_CARS_FROM_SERVER,
 } from './constants';
 
 const CarsListReducer = (state = [], action) => {
@@ -9,12 +8,6 @@ const CarsListReducer = (state = [], action) => {
             return [
                 ...state,
                 action.cars,
-            ];
-        case GET_CARS_FROM_SERVER:
-            const { cars } = getState();
-            return [
-                ...state,
-                cars,
             ];
         default:
             return state;

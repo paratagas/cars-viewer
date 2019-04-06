@@ -9,20 +9,8 @@ import './CarsList.scss';
 import Car from '../Car/Car';
 import Header from '../Header/Header';
 import { BASE_API_URL } from '../../constants';
-import {
-    SAVE_CARS_TO_SERVER,
-    GET_CARS_FROM_SERVER,
-} from './constants';
 import reducer from './reducer';
-import {
-    getCars,
-    setCars,
-} from './actions';
-
-
-import {
-    makeSelectWorkspaceTranslate,
-} from './selectors';
+import { setCars } from './actions';
 
 class CarsList extends Component {
     static propTypes = {
@@ -35,9 +23,6 @@ class CarsList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            cars: [],
-        };
     }
 
     componentDidMount() {
@@ -45,11 +30,6 @@ class CarsList extends Component {
             .get(BASE_API_URL + 'cars')
             .then(response => {
                 const data = response.data;
-                console.log('data: ', data);
-                this.setState({
-                    cars: data.cars,
-                });
-
                 this.props.setCars(data.cars);
             })
             .catch(error => {
@@ -58,23 +38,23 @@ class CarsList extends Component {
     }
 
     render() {
-        const { cars } = this.state;
-        // const { cars } = this.props;
+        const { cars } = this.props;
 
         return (
+            cars.length &&
             <div className="cars--list">
                 <Header />
-                {cars.map((car, index) => <Car data={car} key={`car-${index}`} />)}
+                {cars[0].map((car, index) => <Car data={car} key={`car-${index}`} />)}
             </div>
         );
     }
 }
 
-const mapStateToProps = state => {
-    // cars: getCars(state.cars)
-    return {
-        cars: state.cars,
-    };
+
+const mapStateToProps = store => {
+  return {
+    cars: store.toObject().cars,
+  };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -82,7 +62,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-// const withReducer = injectReducer({ key: 'CarsList', reducer });
 const withReducer = injectReducer({ key: 'cars', reducer });
 
 export default compose(
