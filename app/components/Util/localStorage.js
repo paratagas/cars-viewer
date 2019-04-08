@@ -1,24 +1,54 @@
-function saveCarToFavList(movie) {
-  console.log('saveCarToFavList');
-  /*let movies = localStorage.getItem('movies');
+import { LOCAL_STORAGE_STORE_NAME } from '../../constants';
 
-  if (!movies) {
-    localStorage.setItem('movies', JSON.stringify([]));
+function saveCarToFavList(currentCar) {
+  let favCars = localStorage.getItem(LOCAL_STORAGE_STORE_NAME);
+
+  if (!favCars) {
+    localStorage.setItem(LOCAL_STORAGE_STORE_NAME, JSON.stringify([]));
   }
 
-  movies = localStorage.getItem('movies');
-  movies = JSON.parse(movies);
+  favCars = localStorage.getItem(LOCAL_STORAGE_STORE_NAME);
+  favCars = JSON.parse(favCars);
 
-  const movieExists = movies.some(item => {
-    return movie.id === item.id;
+  const carExists = favCars.some(item => {
+    return currentCar.stockNumber === item.stockNumber;
   });
 
-  if (movieExists) return;
+  if (carExists) {
+    const messageExists = `Car with stock number ${currentCar.stockNumber} already exists in favourite cars list.`;
+    alert(messageExists);
+    return;
+  };
 
-  movies.push(movie);
-  localStorage.setItem('movies', JSON.stringify(movies));*/
+  favCars.push(currentCar);
+  localStorage.setItem(LOCAL_STORAGE_STORE_NAME, JSON.stringify(favCars));
+  const messageSaved = `Car with stock number ${currentCar.stockNumber} was saved to favourite cars list.`;
+  location.href = '/';
+  alert(messageSaved);
+}
+
+function removeCarFromFavList(currentCar) {
+    let favCars = localStorage.getItem(LOCAL_STORAGE_STORE_NAME);
+
+    if (!favCars) return;
+
+    favCars = JSON.parse(favCars);
+
+    favCars.forEach((item, index, array) => {
+        if (currentCar.stockNumber === item.stockNumber) {
+            array.splice(index, 1);
+        }
+
+        return array;
+    });
+
+    localStorage.setItem(LOCAL_STORAGE_STORE_NAME, JSON.stringify(favCars));
+    const messageRemoved = `Car with stock number ${currentCar.stockNumber} was removed from favourite cars list.`;
+    location.href = '/';
+    alert(messageRemoved);
 }
 
 export {
-  saveCarToFavList,
+    saveCarToFavList,
+    removeCarFromFavList,
 };

@@ -22,7 +22,7 @@ import messages from './messages';
 import './index.scss';
 import { BASE_API_URL, CAR_IMAGE_PLACEHOLDER_LARGE } from '../../constants';
 import Button from '../../components/Button/Button';
-import { saveCarToFavList } from '../../components/Util/localStorage';
+import { saveCarToFavList, removeCarFromFavList } from '../../components/Util/localStorage';
 
 /* eslint-disable react/prefer-stateless-function */
 class DetailsPage extends React.PureComponent {
@@ -48,6 +48,7 @@ class DetailsPage extends React.PureComponent {
   constructor(props) {
       super(props);
       this.saveCarToFavList = saveCarToFavList.bind(this);
+      this.removeCarFromFavList = removeCarFromFavList.bind(this);
   }
 
   componentWillMount() {
@@ -98,7 +99,11 @@ class DetailsPage extends React.PureComponent {
             </div>
             <Button
                 text="Save"
-                onClickHandler={() => this.saveCarToFavList()}
+                onClickHandler={() => this.saveCarToFavList(currentCar)}
+            />
+            <Button
+                text="Remove"
+                onClickHandler={() => this.removeCarFromFavList(currentCar)}
             />
           </div>
         </div>
