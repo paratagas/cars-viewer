@@ -3,10 +3,11 @@
 .vscode
 
 # Folders
-node_modules
-dist
 build
+coverage
+dist
 docs
+node_modules
 
 # Logs
 *.log
