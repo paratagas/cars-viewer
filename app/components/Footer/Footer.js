@@ -4,7 +4,7 @@ import './Footer.scss';
 function Footer() {
     return (
         <div className="footer">
-            © AUTO1 Group 2019
+            © paratagas 2019
         </div>
     );
 }
