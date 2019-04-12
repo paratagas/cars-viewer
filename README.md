@@ -2,7 +2,7 @@
 
 ### Cars viewer for selecting favourites cars
 
-![Home page](https://i.imgur.com/tdOK6wr.png)
+![Home page](https://i.imgur.com/3hOWmTp.png)
 
 ---
 
